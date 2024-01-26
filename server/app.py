@@ -32,10 +32,12 @@ class Plants(Resource):
 
     def post(self):
 
+        # changed request.form to request.json to accept raw data as json
+
         new_plant = Plant(
-            name = request.form['name'],
-            image = request.form['image'],
-            price = request.form['price']
+            name = request.json['name'],
+            image = request.json['image'],
+            price = request.json['price']
         )
 
         db.session.add(new_plant)
@@ -77,7 +79,7 @@ class PlantByID(Resource):
 
         return response
 
-api.add_resource(PlantByID, '/plants<int:id>')        
+api.add_resource(PlantByID, '/plants/<int:id>')        
         
 
 if __name__ == '__main__':
